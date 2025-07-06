@@ -13,7 +13,7 @@
                             Experienced staff is dedicated to improving our patients’ health and
                             enhancing
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="col-md-6 align-self-end wow fadeInRight" data-wow-delay="0.8s" data-wow-duration="0.8s">
@@ -25,11 +25,11 @@
                                 Transparent Background PNGs by Vecteezy
                             </a>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-            
+
             <div class="item2 move-3" data-bottom-top="transform: translateY(-50px)"
                 data-top-bottom="transform: translateY(50px)">
                 <div class="dz-media2">
@@ -90,7 +90,7 @@
                                 fill="#0A3366" />
                         </svg>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="col-xl-7 col-lg-6 m-b30 position-relative">
@@ -106,7 +106,7 @@
                             natural beauty. Explore our website to learn more about our services and
                             discover the confidence that comes with feeling your best in your own skin.</p>
                     </div>
-                   
+
                     <div class="widget-rating3 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
                         <ul class="star-list">
                             <li><i class="fa fa-star text-orange"></i></li>
@@ -115,7 +115,7 @@
                             <li><i class="fa fa-star text-orange"></i></li>
                             <li><i class="fa fa-star text-orange"></i></li>
                         </ul>
-                       
+
                     </div>
                     <div class="bottom-media" data-bottom-top="transform: translateY(-30px)"
                         data-top-bottom="transform: translateY(30px)">
@@ -169,7 +169,7 @@
                         <div class="dz-flex-inner">
                             <div class="dz-media">
                                 <img src="images/services/middle/img1.webp" alt="/">
-                                
+
                             </div>
                             <div class="dz-info">
                                 <div class="dz-info-top">
@@ -183,7 +183,7 @@
                                         <li>Health Checkups</li>
                                     </ul>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@
                         <div class="dz-flex-inner">
                             <div class="dz-media">
                                 <img src="images/services/middle/img2.webp" alt="/">
-                               
+
                             </div>
                             <div class="dz-info">
                                 <div class="dz-info-top">
@@ -213,7 +213,7 @@
                                         <li>Health Checkups</li>
                                     </ul>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                         <div class="dz-flex-inner">
                             <div class="dz-media">
                                 <img src="images/services/middle/img3.webp" alt="/">
-                                
+
                             </div>
                             <div class="dz-info">
                                 <div class="dz-info-top">
@@ -243,7 +243,7 @@
                                         <li>Health Checkups</li>
                                     </ul>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -259,7 +259,7 @@
                         <div class="dz-flex-inner">
                             <div class="dz-media">
                                 <img src="images/services/middle/img4.webp" alt="/">
-                                
+
                             </div>
                             <div class="dz-info">
                                 <div class="dz-info-top">
@@ -273,7 +273,7 @@
                                         <li>Health Checkups</li>
                                     </ul>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -289,7 +289,7 @@
                         <div class="dz-flex-inner">
                             <div class="dz-media">
                                 <img src="images/services/middle/img5.webp" alt="/">
-                               
+
                             </div>
                             <div class="dz-info">
                                 <div class="dz-info-top">
@@ -303,14 +303,14 @@
                                         <li>Health Checkups</li>
                                     </ul>
                                 </div>
-                              
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-       
+
     </div>
 </section>
 
@@ -392,7 +392,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="widget-rating3 wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
                         <ul class="star-list">
                             <li><i class="fa fa-star"></i></li>
@@ -401,7 +401,7 @@
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                         </ul>
-                       
+
                     </div>
                 </div>
             </div>
@@ -473,7 +473,7 @@
             <div class="col-xl-6 col-lg-8">
                 <div class="content-media">
                     <div class="dz-media">
-                                                <img src="images/team/male.jpg" alt="">
+                        <img src="images/team/male.jpg" alt="">
 
                     </div>
                     <div class="item1">
@@ -528,4 +528,4 @@
 
 
 
-@include('layout.footer')
+@include('layout.dashfooter')

@@ -1,59 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen font-sans">
+@extends('layout.app')
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow p-4 flex justify-between items-center">
-        <h1 class="text-xl font-semibold text-gray-800">Dashboard</h1>
-        <div class="flex items-center space-x-4">
-            <a href="{{ route('doctors.index') }}" class="text-sm text-gray-700 hover:text-blue-500">Doctors</a>
-            <a href="{{ route('appointments.index') }}" class="text-sm text-gray-700 hover:text-blue-500">Appointments</a>
-            <a href="{{ route('reports.index') }}" class="text-sm text-gray-700 hover:text-blue-500">Reports</a>
+@section('title', 'Dashboard')
+@section('page-title', 'DG Lab Dashboard')
 
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="text-sm text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded">
-                    Logout
-                </button>
-            </form>
+@section('additional-styles')
+.stat-card {
+background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+border-left: 4px solid;
+}
+@endsection
+
+@section('content')
+<!-- Welcome Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">Welcome to DG Lab</h2>
+        <p class="text-gray-600">Here's what's happening in your medical practice today</p>
+    </div>
+
+    <!-- Summary Tiles -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
+        <!-- Appointments Today -->
+        <div class="stat-card border-blue-500 shadow-lg rounded-xl p-6 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Appointments Today</p>
+                    <p class="text-3xl font-bold text-blue-600">{{ $appointmentsToday }}</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-calendar-check text-blue-600 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="fas fa-clock mr-1"></i>
+                <span>Updated just now</span>
+            </div>
         </div>
-    </nav>
 
-   <!-- Summary Tiles -->
-<div class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Total Doctors -->
+        <div class="stat-card border-green-500 shadow-lg rounded-xl p-6 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Total Doctors</p>
+                    <p class="text-3xl font-bold text-green-600">{{ $totalDoctors }}</p>
+                </div>
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-user-md text-green-600 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="fas fa-users mr-1"></i>
+                <span>Active medical staff</span>
+            </div>
+        </div>
 
-    <!-- Appointments Today -->
-    <div class="bg-white shadow rounded-lg p-4">
-        <h3 class="text-sm font-medium text-gray-600">Appointments Today</h3>
-        <p class="mt-2 text-2xl font-semibold text-blue-600">{{ $appointmentsToday }}</p>
+        <!-- Reports Uploaded Today -->
+        <div class="stat-card border-purple-500 shadow-lg rounded-xl p-6 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Reports Uploaded Today</p>
+                    <p class="text-3xl font-bold text-purple-600">{{ $reportsUploadedToday }}</p>
+                </div>
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-file-upload text-purple-600 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="fas fa-arrow-up mr-1"></i>
+                <span>New reports today</span>
+            </div>
+        </div>
+
+        <!-- Reports Downloaded Today -->
+        <div class="stat-card border-red-500 shadow-lg rounded-xl p-6 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Reports Downloaded Today</p>
+                    <p class="text-3xl font-bold text-red-600">{{ $reportsDownloadedToday }}</p>
+                </div>
+                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-file-download text-red-600 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="fas fa-arrow-down mr-1"></i>
+                <span>Downloads today</span>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Total Doctors -->
-    <div class="bg-white shadow rounded-lg p-4">
-        <h3 class="text-sm font-medium text-gray-600">Total Doctors</h3>
-        <p class="mt-2 text-2xl font-semibold text-green-600">{{ $totalDoctors }}</p>
-    </div>
+    <!-- Quick Actions -->
+    <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-    <!-- Reports Uploaded Today -->
-    <div class="bg-white shadow rounded-lg p-4">
-        <h3 class="text-sm font-medium text-gray-600">Reports Uploaded Today</h3>
-        <p class="mt-2 text-2xl font-semibold text-purple-600">{{ $reportsUploadedToday }}</p>
+        </div>
     </div>
-
-    <!-- Reports Downloaded Today -->
-    <div class="bg-white shadow rounded-lg p-4">
-        <h3 class="text-sm font-medium text-gray-600">Reports Downloaded Today</h3>
-        <p class="mt-2 text-2xl font-semibold text-red-600">{{ $reportsDownloadedToday }}</p>
-    </div>
-
 </div>
 
-
-</body>
-</html>
+@endsection

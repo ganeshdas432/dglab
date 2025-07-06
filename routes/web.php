@@ -22,7 +22,7 @@ use Illuminate\Support\Carbon;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::get('/doctorslist', function () {
     return view('doctors');
