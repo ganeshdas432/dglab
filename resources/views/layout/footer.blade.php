@@ -1,143 +1,7 @@
 <!-- Footer Section -->
 <footer class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Main Footer Content -->
-        <div class="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-            <!-- Company Info -->
-            <div class="space-y-4">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-hospital text-white text-lg"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white">DG Lab</h3>
-                </div>
-                <p class="text-gray-300 text-sm leading-relaxed">
-                    Your trusted partner in medical excellence, providing comprehensive healthcare management solutions
-                    with cutting-edge technology and compassionate care.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                        <i class="fab fa-facebook-f text-lg"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                        <i class="fab fa-twitter text-lg"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                        <i class="fab fa-instagram text-lg"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                        <i class="fab fa-linkedin-in text-lg"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Quick Links -->
-            <div class="space-y-4">
-                <h4 class="text-lg font-semibold text-white flex items-center">
-                    <i class="fas fa-link mr-2 text-blue-400"></i>
-                    Quick Links
-                </h4>
-                <ul class="space-y-2">
-                    <li>
-                        <a href="{{ route('dashboard') }}"
-                            class="text-gray-300 hover:text-white transition-colors duration-200 flex items-center">
-                            <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('doctors.index') }}"
-                            class="text-gray-300 hover:text-white transition-colors duration-200 flex items-center">
-                            <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                            Our Doctors
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('appointments.index') }}"
-                            class="text-gray-300 hover:text-white transition-colors duration-200 flex items-center">
-                            <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                            Appointments
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('reports.index') }}"
-                            class="text-gray-300 hover:text-white transition-colors duration-200 flex items-center">
-                            <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                            Medical Reports
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Services -->
-            <div class="space-y-4">
-                <h4 class="text-lg font-semibold text-white flex items-center">
-                    <i class="fas fa-stethoscope mr-2 text-blue-400"></i>
-                    Our Services
-                </h4>
-                <ul class="space-y-2">
-                    <li class="text-gray-300 flex items-center">
-                        <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                        General Medicine
-                    </li>
-                    <li class="text-gray-300 flex items-center">
-                        <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                        Diagnostic Services
-                    </li>
-                    <li class="text-gray-300 flex items-center">
-                        <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                        Laboratory Testing
-                    </li>
-                    <li class="text-gray-300 flex items-center">
-                        <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                        Digital Reports
-                    </li>
-                    <li class="text-gray-300 flex items-center">
-                        <i class="fas fa-chevron-right mr-2 text-blue-400 text-xs"></i>
-                        Online Consultation
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="space-y-4">
-                <h4 class="text-lg font-semibold text-white flex items-center">
-                    <i class="fas fa-phone mr-2 text-blue-400"></i>
-                    Contact Us
-                </h4>
-                <div class="space-y-3">
-                    <div class="flex items-start space-x-3">
-                        <i class="fas fa-map-marker-alt text-blue-400 mt-1"></i>
-                        <div>
-                            <p class="text-gray-300 text-sm">123 Healthcare Street</p>
-                            <p class="text-gray-300 text-sm">Medical District, City 12345</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-phone text-blue-400"></i>
-                        <a href="tel:+918100644924"
-                            class="text-gray-300 hover:text-white transition-colors duration-200">
-                            +91 8100644924
-                        </a>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-envelope text-blue-400"></i>
-                        <a href="mailto:doctorghoshsclinic@gmail.com"
-                            class="text-gray-300 hover:text-white transition-colors duration-200">
-                            doctorghoshsclinic@gmail.com
-                        </a>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-clock text-blue-400"></i>
-                        <div>
-                            <p class="text-gray-300 text-sm">Mon - Sat: 7:00 AM - 5:00 PM</p>
-                            <p class="text-gray-300 text-sm">Sunday: Emergency Only</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Footer Bottom -->
         <div class="border-t border-gray-700 py-6">
@@ -160,13 +24,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <span class="text-gray-400 text-sm">Powered by</span>
-                    <div class="flex items-center space-x-1">
-                        <i class="fas fa-heart text-red-500 text-sm"></i>
-                        <span class="text-white text-sm font-medium">Laravel</span>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>

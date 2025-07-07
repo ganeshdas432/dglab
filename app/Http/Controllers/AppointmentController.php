@@ -20,49 +20,65 @@ class AppointmentController extends Controller
     }
 
     // Store a new appointment
-  public function store(Request $request): JsonResponse
-{
-    try {
-        // Validate request data
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'appointment_date' => 'required|date|after_or_equal:today',
-            'doctor_id' => 'required|exists:doctors,id',
-            'age' => 'required|integer|min:0',
-            'address' => 'required|string|max:255',
-        ]);
+    public function store(Request $request)
+    {
+        try {
+            // Validate request data
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'nullable|email|max:255',
+                'phone' => 'required|string|max:20',
+                'appointment_date' => 'nullable|date',
+                'doctor_id' => 'required|exists:doctors,id',
+                'doctor_name' => 'nullable|string|max:255',
+                'age' => 'nullable|integer|min:0',
+                'address' => 'nullable|string|max:255',
+                'notes' => 'nullable|string|max:1000',
+            ]);
 
-        // Find doctor
-        $doctor = Doctor::findOrFail($validated['doctor_id']);
+            // Find doctor
+            $doctor = Doctor::findOrFail($validated['doctor_id']);
 
-        // Create appointment
-        Appointment::create([
-            'name' => $validated['name'],
-            'doctor_name' => $doctor->name,
-            'mobile' => $validated['phone'],
-            'appointment_date' => $validated['appointment_date'],
-            'doctor_id' => $validated['doctor_id'],
-            'status' => 'Pending',
-            'age' => $validated['age'],
-            'address' => $validated['address'],
-        ]);
+            // Create appointment
+            Appointment::create([
+                'name' => $validated['name'],
+                'doctor_name' => $validated['doctor_name'] ?? $doctor->name,
+                'mobile' => $validated['phone'],
+                'appointment_date' => $validated['appointment_date'] ?? now()->addDays(1)->format('Y-m-d'),
+                'doctor_id' => $validated['doctor_id'],
+                'status' => 'Pending',
+                'age' => $validated['age'] ?? null,
+                'address' => $validated['address'] ?? null,
+                'email' => $validated['email'] ?? null,
+                'notes' => $validated['notes'] ?? null,
+            ]);
 
-        return response()->json([
-            'message' => 'Appointment booked successfully!'
-        ], 201);
+            // Check if request expects JSON (AJAX)
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Appointment booked successfully!'
+                ], 201);
+            }
 
-    } catch (ValidationException $e) {
-        return response()->json([
-            'errors' => $e->errors()
-        ], 422);
-    } catch (\Exception $e) {
-        return response()->json([
-            'message' => 'An error occurred.',
-            'details' => $e->getMessage() // Optional: useful for debugging, remove in production
-        ], 500);
+            // Regular form submission - redirect back with success message
+            return redirect()->back()->with('success', 'Appointment booked successfully!');
+        } catch (ValidationException $e) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'errors' => $e->errors()
+                ], 422);
+            }
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'An error occurred.',
+                    'details' => $e->getMessage()
+                ], 500);
+            }
+            return redirect()->back()->withErrors(['error' => 'An error occurred while booking the appointment.'])->withInput();
+        }
     }
-}
 
 
 
