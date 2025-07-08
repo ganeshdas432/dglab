@@ -14,9 +14,9 @@ class ReportController extends Controller
         try {
             $query = Report::query();
 
-            // Filter by receipt ID
-            if ($request->filled('receipt_id')) {
-                $query->where('receipt_id', 'like', '%' . $request->receipt_id . '%');
+            // Filter by mobile number
+            if ($request->filled('mobile_no')) {
+                $query->where('mobile_no', 'like', '%' . $request->mobile_no . '%');
             }
 
             // Search by patient name
@@ -78,16 +78,16 @@ class ReportController extends Controller
                 return [
                     'id' => $report->id,
                     'serial' => $globalIndex,
-                    'receipt_id' => $report->receipt_id,
+                    'mobile_no' => $report->mobile_no,
                     'patient_name' => $report->patient_name,
                     'bill_date' => $report->bill_date
-                        ? Carbon::parse($report->bill_date)->format('M d, Y')
+                        ? $report->bill_date->format('M d, Y')
                         : 'Not specified',
                     'bill_date_raw' => $report->bill_date,
-                    'uploaded_at' => $report->created_at->format('M d, Y h:i A'),
+                    'uploaded_at' => $report->created_at ? $report->created_at->format('M d, Y h:i A') : 'N/A',
                     'uploaded_at_raw' => $report->created_at,
                     'downloaded_at' => $report->downloaded_at
-                        ? Carbon::parse($report->downloaded_at)->format('M d, Y h:i A')
+                        ? $report->downloaded_at->format('M d, Y h:i A')
                         : null,
                     'downloaded_at_raw' => $report->downloaded_at,
                     'file_path' => $report->file_path,
@@ -185,7 +185,7 @@ class ReportController extends Controller
                 'success' => true,
                 'data' => [
                     'id' => $report->id,
-                    'receipt_id' => $report->receipt_id,
+                    'mobile_no' => $report->mobile_no,
                     'patient_name' => $report->patient_name,
                     'bill_date' => $report->bill_date,
                     'file_path' => $report->file_path,

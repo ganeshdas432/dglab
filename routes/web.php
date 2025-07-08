@@ -71,6 +71,10 @@ Route::get('appointments', [AppointmentController::class, 'index'])->name('appoi
 
 Route::get('appointment',[AppointmentController::class,'index']);
 
+// Public report routes (no authentication required)
+Route::post('reports/search', [ReportController::class, 'showPublicReports'])->name('reports.search');
+Route::get('reports/download/{id}', [ReportController::class, 'downloadReport'])->name('reports.download-public');
+
 Route::get('report/download',[ReportController::class,'download']);
 
 Route::middleware(['auth'])->group(function () {

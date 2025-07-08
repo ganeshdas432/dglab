@@ -5,20 +5,20 @@
         <form id="downloadReportForm" class="modal-content">
             @csrf
             <div class="modal-header">
-                <h5 class="modal-title" id="downloadReportModalLabel">Download Report</h5>
+                <h5 class="modal-title" id="downloadReportModalLabel">View Your Reports</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="receipt_id" class="form-label">Enter Receipt Number</label>
-                    <input type="text" class="form-control" name="receipt_id" id="receipt_id" required
+                    <label for="mobile_no" class="form-label">Enter Mobile Number</label>
+                    <input type="text" class="form-control" name="mobile_no" id="mobile_no" required
                         style="border: 2px solid #0d6efd; border-radius: 4px;">
                     <div id="downloadError" class="text-danger mt-2" style="display: none;"></div>
                     <div id="downloadSuccess" class="text-success mt-2" style="display: none;"></div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Download</button>
+                <button type="submit" class="btn btn-primary">View Reports</button>
             </div>
         </form>
 
@@ -189,7 +189,7 @@
     document.getElementById('downloadReportForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const receiptId = document.getElementById('receipt_id').value;
+        const mobileNo = document.getElementById('mobile_no').value;
         const errorDiv = document.getElementById('downloadError');
         const successDiv = document.getElementById('downloadSuccess');
 
@@ -199,36 +199,35 @@
         successDiv.style.display = 'none';
         successDiv.textContent = '';
 
-        fetch(`/report/download?receipt_id=${encodeURIComponent(receiptId)}`, {
-                method: 'GET',
-            })
-            .then(response => {
-                if (response.status === 200) {
-                    return response.blob();
-                } else {
-                    return response.text().then(text => {
-                        throw new Error(text);
-                    });
-                }
-            })
-            .then(blob => {
-                const downloadUrl = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = downloadUrl;
-                a.download = "report.pdf";
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                URL.revokeObjectURL(downloadUrl);
+        // Validate mobile number
+        if (!mobileNo.trim()) {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Please enter a mobile number.';
+            return;
+        }
 
-                // Show success message
-                successDiv.style.display = 'block';
-                successDiv.textContent = 'Report downloaded successfully.';
-            })
-            .catch(error => {
-                errorDiv.style.display = 'block';
-                errorDiv.textContent = 'Report not found or file missing.';
-            });
+        // Create a form and submit to the reports search route
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{{ route("reports.search") }}';
+
+        // Add CSRF token
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = '{{ csrf_token() }}';
+        form.appendChild(csrfInput);
+
+        // Add mobile number
+        const mobileInput = document.createElement('input');
+        mobileInput.type = 'hidden';
+        mobileInput.name = 'mobile_no';
+        mobileInput.value = mobileNo;
+        form.appendChild(mobileInput);
+
+        // Submit form
+        document.body.appendChild(form);
+        form.submit();
     });
 </script>
 

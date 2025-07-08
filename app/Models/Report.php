@@ -10,16 +10,23 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-    'receipt_id',
-    'patient_name',
-    'bill_date',
-    'appointment_id',
-    'file_path',
-    'downloaded_at',
-];
+        'mobile_no',
+        'patient_name',
+        'bill_date',
+        'appointment_id',
+        'file_path',
+        'downloaded_at',
+    ];
+
+    protected $casts = [
+        'bill_date' => 'date',
+        'downloaded_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 
     public function appointment()
-{
-    return $this->belongsTo(Appointment::class, 'appointment_id');
-}
+    {
+        return $this->belongsTo(Appointment::class, 'appointment_id');
+    }
 }

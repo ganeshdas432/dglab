@@ -32,11 +32,11 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            <i class="fas fa-receipt mr-2"></i>Receipt ID
+                            <i class="fas fa-mobile-alt mr-2"></i>Mobile Number
                         </label>
-                        <input type="text" name="receipt_id" required
+                        <input type="text" name="mobile_no" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg form-input focus:outline-none"
-                            placeholder="Enter receipt ID">
+                            placeholder="Enter mobile number">
                     </div>
 
                     <div>
@@ -146,12 +146,12 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
-                    <!-- Receipt ID -->
+                    <!-- Mobile Number -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-receipt mr-1"></i>Receipt ID
+                            <i class="fas fa-mobile-alt mr-1"></i>Mobile Number
                         </label>
-                        <input type="text" id="filter-receipt" placeholder="Enter receipt ID"
+                        <input type="text" id="filter-receipt" placeholder="Enter mobile number"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
@@ -255,7 +255,7 @@
                                 </th>
                                 <th
                                     class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    <i class="fas fa-receipt mr-1"></i>Receipt ID
+                                    <i class="fas fa-mobile-alt mr-1"></i>Mobile Number
                                 </th>
                                 <th
                                     class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -463,7 +463,7 @@
             // Get filter values
             const filters = {
                 search: $('#search-patient').val(),
-                receipt_id: $('#filter-receipt').val(),
+                mobile_no: $('#filter-receipt').val(),
                 downloaded_filter: $('#filter-downloaded').val(),
                 uploaded_date_filter: $('#filter-uploaded-date').val(),
                 downloaded_date_filter: $('#filter-downloaded-date').val(),
@@ -544,11 +544,11 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
                             <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-receipt text-blue-600"></i>
+                                <i class="fas fa-mobile-alt text-blue-600"></i>
                             </div>
                             <div>
-                                <div class="text-sm font-medium text-gray-900">${report.receipt_id}</div>
-                                <div class="text-sm text-gray-500">Receipt Number</div>
+                                <div class="text-sm font-medium text-gray-900">${report.mobile_no}</div>
+                                <div class="text-sm text-gray-500">Mobile Number</div>
                             </div>
                         </div>
                     </td>

@@ -7,30 +7,30 @@
     <title>Doctor Ghosh’s Super Specially Clinic & Diagnostic Centre </title>
 
     <!-- Meta -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="author" content="DGDarma Lab">
-<meta name="robots" content="index, follow">
-<meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="DGDarma Lab">
+    <meta name="robots" content="index, follow">
+    <meta name="format-detection" content="telephone=no">
 
-<meta name="keywords"
-    content="DGDarma Lab, skin clinic Kolkata, dermatology polyclinic, skin specialists Rahara, Dr. Kumar Jyoti Ghosh, dermatology clinic, skin treatment Kolkata, skincare services, Rahara skin specialists, multi-specialist skin clinic">
+    <meta name="keywords"
+        content="DGDarma Lab, skin clinic Kolkata, dermatology polyclinic, skin specialists Rahara, Dr. Kumar Jyoti Ghosh, dermatology clinic, skin treatment Kolkata, skincare services, Rahara skin specialists, multi-specialist skin clinic">
 
-<meta name="description"
-    content="DGDarma Lab is a modern dermatology polyclinic in Rahara, Kolkata, founded by Dr. Kumar Jyoti Ghosh. Home to multiple skin specialists, we offer expert skincare treatments and personalized care in a professional, patient-friendly environment.">
+    <meta name="description"
+        content="DGDarma Lab is a modern dermatology polyclinic in Rahara, Kolkata, founded by Dr. Kumar Jyoti Ghosh. Home to multiple skin specialists, we offer expert skincare treatments and personalized care in a professional, patient-friendly environment.">
 
-<meta property="og:title" content="DGDarma Lab – Multispeciality Skin Clinic in Kolkata">
-<meta property="og:description"
-    content="Visit DGDarma Lab in Rahara, Kolkata – a dermatology polyclinic founded by Dr. Kumar Jyoti Ghosh. We offer expert treatment from multiple skin specialists for all your skincare needs.">
-<meta property="og:image" content="https://yourdomain.com/assets/images/social-image.png">
-<meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:title" content="DGDarma Lab – Multispeciality Skin Clinic in Kolkata">
+    <meta property="og:description"
+        content="Visit DGDarma Lab in Rahara, Kolkata – a dermatology polyclinic founded by Dr. Kumar Jyoti Ghosh. We offer expert treatment from multiple skin specialists for all your skincare needs.">
+    <meta property="og:image" content="https://yourdomain.com/assets/images/social-image.png">
+    <meta property="og:url" content="https://yourdomain.com/">
 
-<!-- TWITTER META -->
-<meta name="twitter:title" content="DGDarma Lab – Multispeciality Skin Clinic in Kolkata">
-<meta name="twitter:description"
-    content="Comprehensive skincare services under one roof at DGDarma Lab, founded by Dr. Kumar Jyoti Ghosh in Rahara, Kolkata. Trusted by patients for expert skin treatments.">
-<meta name="twitter:image" content="https://yourdomain.com/assets/images/social-image.png">
-<meta name="twitter:card" content="summary_large_image">
+    <!-- TWITTER META -->
+    <meta name="twitter:title" content="DGDarma Lab – Multispeciality Skin Clinic in Kolkata">
+    <meta name="twitter:description"
+        content="Comprehensive skincare services under one roof at DGDarma Lab, founded by Dr. Kumar Jyoti Ghosh in Rahara, Kolkata. Trusted by patients for expert skin treatments.">
+    <meta name="twitter:image" content="https://yourdomain.com/assets/images/social-image.png">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- CANONICAL URL -->
     <link rel="canonical" href="https://clinicmaster.dexignzone.com/xhtml/skincare/index.html">
@@ -114,30 +114,30 @@
                                     <a href="/"><span>Home</span> <i class="fas fa-chevron-down tabindex"></i></a>
 
                                 </li>
-                                 <li class="has-mega-menu sub-menu-down auto-width menu-left">
+                                <li class="has-mega-menu sub-menu-down auto-width menu-left">
                                     <a href="{{route('doctorslist')}}"><span>doctors</span> <i class="fas fa-chevron-down tabindex"></i></a>
 
                                 </li>
-                                 <li class="has-mega-menu sub-menu-down auto-width menu-left">
+                                <li class="has-mega-menu sub-menu-down auto-width menu-left">
                                     <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#appointmentModal">
                                         <span>Appointment Book</span>
                                     </a>
                                 </li>
                                 <li class="has-mega-menu sub-menu-down auto-width menu-left">
                                     <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#downloadReportModal">
-                                        <span>Download Report</span>
+                                        <span>View Reports</span>
                                     </a>
                                 </li>
-                               
-                                 <li class="has-mega-menu sub-menu-down auto-width menu-left">
+
+                                <li class="has-mega-menu sub-menu-down auto-width menu-left">
                                     <a href="{{route('about')}}"><span>About Us</span> <i class="fas fa-chevron-down tabindex"></i></a>
 
                                 </li>
-                                 <li class="has-mega-menu sub-menu-down auto-width menu-left">
+                                <li class="has-mega-menu sub-menu-down auto-width menu-left">
                                     <a href="{{route('privacy')}}"><span>Privacy Policy</span> <i class="fas fa-chevron-down tabindex"></i></a>
 
                                 </li>
-                                 <li class="has-mega-menu sub-menu-down auto-width menu-left">
+                                <li class="has-mega-menu sub-menu-down auto-width menu-left">
                                     <a href="{{route('contact')}}"><span>Contact Us</span> <i class="fas fa-chevron-down tabindex"></i></a>
 
                                 </li>
