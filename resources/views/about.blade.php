@@ -21,4 +21,8 @@
     </div>
 </section>
 
-@include('layout.footer')
+
+
+
+
+@include('layout.dashfooter')
