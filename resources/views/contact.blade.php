@@ -18,7 +18,7 @@
 							</div>
 							<div class="icon-content">
 								<h5 class="dz-title fw-semibold">Address</h5>
-								<p>2/5/16 Aurobinda arena block , Rahara bazar , Kolkata- 700118</p>
+								<p>2/5/16 Aurobinda Arena, Block- B , Rahara Bazar , Kolkata- 700118</p>
 							</div>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 							</div>
 							<div class="icon-content">
 								<h5 class="dz-title fw-semibold">Opening Time</h5>
-								<p>Mon-Thu: 8:00am-5:00pm <br> Fri: 8:00am-1:00pm</p>
+								<p>Everyday: 8:00 A.M-8:00 P.M</p>
 							</div>
 						</div>
 					</div>
@@ -79,4 +79,8 @@
     </div>
 </section>
 
-@include('layout.footer')
+
+
+
+
+@include('layout.dashfooter')

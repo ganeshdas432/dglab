@@ -289,7 +289,7 @@
                             </div>
                             <div class="icon-content">
                                 <h5 class="dz-title">Opening Time</h5>
-                                <p>Mon -Sat: 7:00 - 17:00</p>
+                                <p>Everyday: 8:00 A.M-8:00 P.M</p>
                             </div>
                         </div>
                     </div>
