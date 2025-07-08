@@ -290,13 +290,15 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-2">
                             <span class="text-sm text-gray-700">
-                                Showing <span id="showing-from">1</span> to <span id="showing-to">10</span> of <span id="total-results">0</span> results
+                                Showing <span id="showing-from">1</span> to <span id="showing-to">10</span> of <span
+                                    id="total-results">0</span> results
                             </span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <div class="flex items-center space-x-1">
                                 <label for="per-page-select" class="text-sm text-gray-700">Show:</label>
-                                <select id="per-page-select" class="px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <select id="per-page-select"
+                                    class="px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
@@ -304,19 +306,23 @@
                                 </select>
                             </div>
                             <nav class="flex space-x-1">
-                                <button id="first-page" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button id="first-page"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <i class="fas fa-angle-double-left"></i>
                                 </button>
-                                <button id="prev-page" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button id="prev-page"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <i class="fas fa-angle-left"></i>
                                 </button>
                                 <div id="page-numbers" class="flex space-x-1">
                                     <!-- Page numbers will be dynamically generated -->
                                 </div>
-                                <button id="next-page" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button id="next-page"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <i class="fas fa-angle-right"></i>
                                 </button>
-                                <button id="last-page" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button id="last-page"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <i class="fas fa-angle-double-right"></i>
                                 </button>
                             </nav>
@@ -334,207 +340,209 @@
 @section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Pagination variables
-        let currentPage = 1;
-        let perPage = 10;
-        let totalPages = 1;
-        let totalResults = 0;
+$(document).ready(function() {
+    // Pagination variables
+    let currentPage = 1;
+    let perPage = 10;
+    let totalPages = 1;
+    let totalResults = 0;
 
-        // Load reports and stats on page load
-        loadReports();
-        loadStats();
+    // Load reports and stats on page load
+    loadReports();
+    loadStats();
 
-        // Apply filters
-        $('#apply-filters').on('click', function() {
+    // Apply filters
+    $('#apply-filters').on('click', function() {
+        currentPage = 1;
+        loadReports(1);
+    });
+
+    // Clear filters
+    $('#clear-filters').on('click', function() {
+        $('#search-patient').val('');
+        $('#filter-receipt').val('');
+        $('#filter-downloaded').val('');
+        $('#filter-uploaded-date').val('').removeClass('border-blue-500').addClass('border-gray-300');
+        $('#custom-uploaded-date').val('').removeClass('border-blue-500').addClass('border-gray-300');
+        $('#filter-downloaded-date').val('').removeClass('border-blue-500').addClass('border-gray-300');
+
+        // Reset pagination
+        currentPage = 1;
+        perPage = 10;
+        $('#per-page-select').val(10);
+
+        loadReports(1);
+    });
+
+    // Real-time search on input change with debounce
+    let searchTimeout;
+    $('#search-patient, #filter-receipt').on('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function() {
             currentPage = 1;
             loadReports(1);
-        });
+        }, 500);
+    });
 
-        // Clear filters
-        $('#clear-filters').on('click', function() {
-            $('#search-patient').val('');
-            $('#filter-receipt').val('');
-            $('#filter-downloaded').val('');
-            $('#filter-uploaded-date').val('').removeClass('border-blue-500').addClass('border-gray-300');
-            $('#custom-uploaded-date').val('').removeClass('border-blue-500').addClass('border-gray-300');
-            $('#filter-downloaded-date').val('').removeClass('border-blue-500').addClass('border-gray-300');
+    // Filter change events
+    $('#filter-downloaded, #filter-uploaded-date, #filter-downloaded-date').on('change', function() {
+        // Handle date filter visual feedback
+        if ($(this).attr('id') === 'filter-uploaded-date' && $(this).val() !== '') {
+            $('#custom-uploaded-date').val('').removeClass('border-blue-500').addClass(
+                'border-gray-300');
+            $(this).removeClass('border-gray-300').addClass('border-blue-500');
+        }
+        currentPage = 1;
+        loadReports(1);
+    });
 
-            // Reset pagination
-            currentPage = 1;
-            perPage = 10;
-            $('#per-page-select').val(10);
+    // Custom uploaded date picker change event
+    $('#custom-uploaded-date').on('change', function() {
+        if ($(this).val() !== '') {
+            $('#filter-uploaded-date').val('').removeClass('border-blue-500').addClass(
+                'border-gray-300');
+            $(this).removeClass('border-gray-300').addClass('border-blue-500');
+        }
+        currentPage = 1;
+        loadReports(1);
+    });
 
+    // Pagination event handlers
+    $('#per-page-select').on('change', function() {
+        perPage = parseInt($(this).val());
+        currentPage = 1;
+        loadReports(1);
+    });
+
+    $('#first-page').on('click', function() {
+        if (currentPage > 1) {
             loadReports(1);
-        });
+        }
+    });
 
-        // Real-time search on input change with debounce
-        let searchTimeout;
-        $('#search-patient, #filter-receipt').on('input', function() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(function() {
-                currentPage = 1;
-                loadReports(1);
-            }, 500);
-        });
+    $('#prev-page').on('click', function() {
+        if (currentPage > 1) {
+            loadReports(currentPage - 1);
+        }
+    });
 
-        // Filter change events
-        $('#filter-downloaded, #filter-uploaded-date, #filter-downloaded-date').on('change', function() {
-            // Handle date filter visual feedback
-            if ($(this).attr('id') === 'filter-uploaded-date' && $(this).val() !== '') {
-                $('#custom-uploaded-date').val('').removeClass('border-blue-500').addClass('border-gray-300');
-                $(this).removeClass('border-gray-300').addClass('border-blue-500');
-            }
-            currentPage = 1;
-            loadReports(1);
-        });
+    $('#next-page').on('click', function() {
+        if (currentPage < totalPages) {
+            loadReports(currentPage + 1);
+        }
+    });
 
-        // Custom uploaded date picker change event
-        $('#custom-uploaded-date').on('change', function() {
-            if ($(this).val() !== '') {
-                $('#filter-uploaded-date').val('').removeClass('border-blue-500').addClass('border-gray-300');
-                $(this).removeClass('border-gray-300').addClass('border-blue-500');
-            }
-            currentPage = 1;
-            loadReports(1);
-        });
+    $('#last-page').on('click', function() {
+        if (currentPage < totalPages) {
+            loadReports(totalPages);
+        }
+    });
 
-        // Pagination event handlers
-        $('#per-page-select').on('change', function() {
-            perPage = parseInt($(this).val());
-            currentPage = 1;
-            loadReports(1);
-        });
+    // Page number click handler (delegated event)
+    $(document).on('click', '.page-number', function() {
+        const page = parseInt($(this).data('page'));
+        if (page !== currentPage) {
+            loadReports(page);
+        }
+    });
 
-        $('#first-page').on('click', function() {
-            if (currentPage > 1) {
-                loadReports(1);
-            }
-        });
-
-        $('#prev-page').on('click', function() {
-            if (currentPage > 1) {
-                loadReports(currentPage - 1);
-            }
-        });
-
-        $('#next-page').on('click', function() {
-            if (currentPage < totalPages) {
-                loadReports(currentPage + 1);
-            }
-        });
-
-        $('#last-page').on('click', function() {
-            if (currentPage < totalPages) {
-                loadReports(totalPages);
-            }
-        });
-
-        // Page number click handler (delegated event)
-        $(document).on('click', '.page-number', function() {
-            const page = parseInt($(this).data('page'));
-            if (page !== currentPage) {
-                loadReports(page);
-            }
-        });
-
-        function loadStats() {
-            $.ajax({
-                url: '/api/reports/stats',
-                method: 'GET',
-                success: function(response) {
-                    if (response.success) {
-                        const stats = response.data;
-                        $('#stat-total').text(stats.total_reports);
-                        $('#stat-downloaded').text(stats.downloaded_reports);
-                        $('#stat-pending').text(stats.pending_reports);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error loading stats:', error);
+    function loadStats() {
+        $.ajax({
+            url: '/api/reports/stats',
+            method: 'GET',
+            success: function(response) {
+                if (response.success) {
+                    const stats = response.data;
+                    $('#stat-total').text(stats.total_reports);
+                    $('#stat-downloaded').text(stats.downloaded_reports);
+                    $('#stat-pending').text(stats.pending_reports);
                 }
-            });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading stats:', error);
+            }
+        });
+    }
+
+    function loadReports(page = 1) {
+        showLoading(true);
+        currentPage = page;
+
+        // Get filter values
+        const filters = {
+            search: $('#search-patient').val(),
+            mobile_no: $('#filter-receipt').val(),
+            downloaded_filter: $('#filter-downloaded').val(),
+            uploaded_date_filter: $('#filter-uploaded-date').val(),
+            downloaded_date_filter: $('#filter-downloaded-date').val(),
+            page: currentPage,
+            per_page: perPage
+        };
+
+        // Handle custom uploaded date picker
+        const customUploadedDate = $('#custom-uploaded-date').val();
+        if (customUploadedDate) {
+            filters.uploaded_start_date = customUploadedDate;
+            filters.uploaded_end_date = customUploadedDate;
+            delete filters.uploaded_date_filter;
         }
 
-        function loadReports(page = 1) {
-            showLoading(true);
-            currentPage = page;
-
-            // Get filter values
-            const filters = {
-                search: $('#search-patient').val(),
-                mobile_no: $('#filter-receipt').val(),
-                downloaded_filter: $('#filter-downloaded').val(),
-                uploaded_date_filter: $('#filter-uploaded-date').val(),
-                downloaded_date_filter: $('#filter-downloaded-date').val(),
-                page: currentPage,
-                per_page: perPage
-            };
-
-            // Handle custom uploaded date picker
-            const customUploadedDate = $('#custom-uploaded-date').val();
-            if (customUploadedDate) {
-                filters.uploaded_start_date = customUploadedDate;
-                filters.uploaded_end_date = customUploadedDate;
-                delete filters.uploaded_date_filter;
+        // Remove empty values
+        Object.keys(filters).forEach(key => {
+            if (!filters[key] || filters[key] === '') {
+                delete filters[key];
             }
+        });
 
-            // Remove empty values
-            Object.keys(filters).forEach(key => {
-                if (!filters[key] || filters[key] === '') {
-                    delete filters[key];
+        $.ajax({
+            url: '/api/reports',
+            method: 'GET',
+            data: filters,
+            success: function(response) {
+                if (response.success) {
+                    populateReportsTable(response.data);
+                    updatePagination(response.pagination);
+                    updateResultsCount(response.total);
+                    showToast('Reports loaded successfully', 'success');
+                } else {
+                    showToast('Error loading reports: ' + response.message, 'error');
                 }
-            });
-
-            $.ajax({
-                url: '/api/reports',
-                method: 'GET',
-                data: filters,
-                success: function(response) {
-                    if (response.success) {
-                        populateReportsTable(response.data);
-                        updatePagination(response.pagination);
-                        updateResultsCount(response.total);
-                        showToast('Reports loaded successfully', 'success');
-                    } else {
-                        showToast('Error loading reports: ' + response.message, 'error');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('AJAX Error:', error);
-                    showToast('Failed to load reports. Please try again.', 'error');
-                    showEmptyState();
-                },
-                complete: function() {
-                    showLoading(false);
-                }
-            });
-        }
-
-        function populateReportsTable(reports) {
-            const tbody = $('#reports-tbody');
-            tbody.empty();
-
-            if (reports.length === 0) {
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', error);
+                showToast('Failed to load reports. Please try again.', 'error');
                 showEmptyState();
-                return;
+            },
+            complete: function() {
+                showLoading(false);
             }
+        });
+    }
 
-            reports.forEach(function(report, index) {
-                const downloadedInfo = report.downloaded_at ?
-                    `<div class="flex items-center">
+    function populateReportsTable(reports) {
+        const tbody = $('#reports-tbody');
+        tbody.empty();
+
+        if (reports.length === 0) {
+            showEmptyState();
+            return;
+        }
+
+        reports.forEach(function(report, index) {
+            const downloadedInfo = report.downloaded_at ?
+                `<div class="flex items-center">
                         <i class="fas fa-download text-blue-500 mr-2"></i>
                         <div>
                             <div class="text-sm font-medium">${report.downloaded_at.split(' ')[0]}</div>
                             <div class="text-xs text-gray-500">${report.downloaded_at.split(' ')[1]} ${report.downloaded_at.split(' ')[2]}</div>
                         </div>
                     </div>` :
-                    `<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                `<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                         <i class="fas fa-clock mr-1"></i>
                         Not Downloaded
                     </span>`;
 
-                const row = `
+            const row = `
                 <tr class="table-row transition-all duration-200 hover:bg-gray-50">
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
@@ -588,7 +596,7 @@
                                 <i class="fas fa-eye"></i>
                                 <span>View</span>
                             </a>
-                            <a href="${report.file_url}" download
+                            <a href="/reports/download/${report.id}"
                                 class="bg-green-100 hover:bg-green-200 text-green-800 px-3 py-2 rounded-lg transition-colors duration-200 flex items-center space-x-2">
                                 <i class="fas fa-download"></i>
                                 <span>Download</span>
@@ -597,23 +605,23 @@
                     </td>
                 </tr>
             `;
-                tbody.append(row);
-            });
+            tbody.append(row);
+        });
 
-            // Add hover effects
-            $('.table-row').hover(
-                function() {
-                    $(this).addClass('bg-gray-50 transform scale-[1.01]');
-                },
-                function() {
-                    $(this).removeClass('bg-gray-50 transform scale-[1.01]');
-                }
-            );
-        }
+        // Add hover effects
+        $('.table-row').hover(
+            function() {
+                $(this).addClass('bg-gray-50 transform scale-[1.01]');
+            },
+            function() {
+                $(this).removeClass('bg-gray-50 transform scale-[1.01]');
+            }
+        );
+    }
 
-        function showEmptyState() {
-            const tbody = $('#reports-tbody');
-            tbody.html(`
+    function showEmptyState() {
+        const tbody = $('#reports-tbody');
+        tbody.html(`
             <tr>
                 <td colspan="7" class="px-6 py-12 text-center">
                     <div class="flex flex-col items-center space-y-3">
@@ -626,123 +634,123 @@
                 </td>
             </tr>
         `);
+    }
+
+    function showLoading(show) {
+        if (show) {
+            $('#loading-indicator').removeClass('hidden');
+            $('#apply-filters').prop('disabled', true).html(
+                '<i class="fas fa-spinner fa-spin mr-2"></i>Loading...');
+        } else {
+            $('#loading-indicator').addClass('hidden');
+            $('#apply-filters').prop('disabled', false).html('<i class="fas fa-search mr-2"></i>Apply Filters');
+        }
+    }
+
+    function updateResultsCount(count) {
+        $('#results-count').text(`Found ${count} report${count !== 1 ? 's' : ''}`);
+    }
+
+    function updatePagination(pagination) {
+        if (!pagination) return;
+
+        currentPage = pagination.current_page;
+        totalPages = pagination.last_page;
+        totalResults = pagination.total;
+
+        // Update showing info
+        $('#showing-from').text(pagination.from || 0);
+        $('#showing-to').text(pagination.to || 0);
+        $('#total-results').text(pagination.total);
+
+        // Show/hide pagination container
+        if (totalPages > 1) {
+            $('#pagination-container').removeClass('hidden');
+        } else {
+            $('#pagination-container').addClass('hidden');
+            return;
         }
 
-        function showLoading(show) {
-            if (show) {
-                $('#loading-indicator').removeClass('hidden');
-                $('#apply-filters').prop('disabled', true).html(
-                    '<i class="fas fa-spinner fa-spin mr-2"></i>Loading...');
-            } else {
-                $('#loading-indicator').addClass('hidden');
-                $('#apply-filters').prop('disabled', false).html('<i class="fas fa-search mr-2"></i>Apply Filters');
-            }
+        // Update pagination buttons
+        $('#first-page, #prev-page').prop('disabled', currentPage === 1);
+        $('#next-page, #last-page').prop('disabled', currentPage === totalPages);
+
+        // Generate page numbers
+        generatePageNumbers();
+    }
+
+    function generatePageNumbers() {
+        const pageNumbers = $('#page-numbers');
+        pageNumbers.empty();
+
+        // Calculate page range to show
+        const maxPagesToShow = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+        let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+        // Adjust start page if we're near the end
+        if (endPage - startPage + 1 < maxPagesToShow) {
+            startPage = Math.max(1, endPage - maxPagesToShow + 1);
         }
 
-        function updateResultsCount(count) {
-            $('#results-count').text(`Found ${count} report${count !== 1 ? 's' : ''}`);
-        }
-
-        function updatePagination(pagination) {
-            if (!pagination) return;
-
-            currentPage = pagination.current_page;
-            totalPages = pagination.last_page;
-            totalResults = pagination.total;
-
-            // Update showing info
-            $('#showing-from').text(pagination.from || 0);
-            $('#showing-to').text(pagination.to || 0);
-            $('#total-results').text(pagination.total);
-
-            // Show/hide pagination container
-            if (totalPages > 1) {
-                $('#pagination-container').removeClass('hidden');
-            } else {
-                $('#pagination-container').addClass('hidden');
-                return;
-            }
-
-            // Update pagination buttons
-            $('#first-page, #prev-page').prop('disabled', currentPage === 1);
-            $('#next-page, #last-page').prop('disabled', currentPage === totalPages);
-
-            // Generate page numbers
-            generatePageNumbers();
-        }
-
-        function generatePageNumbers() {
-            const pageNumbers = $('#page-numbers');
-            pageNumbers.empty();
-
-            // Calculate page range to show
-            const maxPagesToShow = 5;
-            let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
-            let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
-
-            // Adjust start page if we're near the end
-            if (endPage - startPage + 1 < maxPagesToShow) {
-                startPage = Math.max(1, endPage - maxPagesToShow + 1);
-            }
-
-            // Add ellipsis at the beginning if needed
-            if (startPage > 1) {
-                pageNumbers.append(`
+        // Add ellipsis at the beginning if needed
+        if (startPage > 1) {
+            pageNumbers.append(`
                     <button class="page-number px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50" data-page="1">
                         1
                     </button>
                 `);
-                if (startPage > 2) {
-                    pageNumbers.append(`
+            if (startPage > 2) {
+                pageNumbers.append(`
                         <span class="px-3 py-1 text-gray-500">...</span>
                     `);
-                }
             }
+        }
 
-            // Add page numbers
-            for (let i = startPage; i <= endPage; i++) {
-                const isActive = i === currentPage;
-                pageNumbers.append(`
+        // Add page numbers
+        for (let i = startPage; i <= endPage; i++) {
+            const isActive = i === currentPage;
+            pageNumbers.append(`
                     <button class="page-number px-3 py-1 border rounded-md text-sm font-medium ${isActive ? 'bg-purple-500 text-white border-purple-500' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}" data-page="${i}">
                         ${i}
                     </button>
                 `);
-            }
+        }
 
-            // Add ellipsis at the end if needed
-            if (endPage < totalPages) {
-                if (endPage < totalPages - 1) {
-                    pageNumbers.append(`
+        // Add ellipsis at the end if needed
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                pageNumbers.append(`
                         <span class="px-3 py-1 text-gray-500">...</span>
                     `);
-                }
-                pageNumbers.append(`
+            }
+            pageNumbers.append(`
                     <button class="page-number px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50" data-page="${totalPages}">
                         ${totalPages}
                     </button>
                 `);
-            }
         }
+    }
 
-        function showToast(message, type = 'info') {
-            // Remove existing toasts
-            $('.toast-notification').remove();
+    function showToast(message, type = 'info') {
+        // Remove existing toasts
+        $('.toast-notification').remove();
 
-            const toastClass = {
-                'success': 'bg-green-500',
-                'error': 'bg-red-500',
-                'warning': 'bg-yellow-500',
-                'info': 'bg-purple-500'
-            } [type] || 'bg-purple-500';
+        const toastClass = {
+            'success': 'bg-green-500',
+            'error': 'bg-red-500',
+            'warning': 'bg-yellow-500',
+            'info': 'bg-purple-500'
+        } [type] || 'bg-purple-500';
 
-            const iconClass = {
-                'success': 'fa-check-circle',
-                'error': 'fa-exclamation-circle',
-                'warning': 'fa-exclamation-triangle',
-                'info': 'fa-info-circle'
-            } [type] || 'fa-info-circle';
+        const iconClass = {
+            'success': 'fa-check-circle',
+            'error': 'fa-exclamation-circle',
+            'warning': 'fa-exclamation-triangle',
+            'info': 'fa-info-circle'
+        } [type] || 'fa-info-circle';
 
-            const toast = $(`
+        const toast = $(`
             <div class="toast-notification fixed top-4 right-4 z-50 ${toastClass} text-white px-6 py-4 rounded-lg shadow-lg transform translate-x-full transition-all duration-300">
                 <div class="flex items-center space-x-3">
                     <i class="fas ${iconClass}"></i>
@@ -754,98 +762,98 @@
             </div>
         `);
 
-            $('body').append(toast);
+        $('body').append(toast);
 
-            // Animate in
-            setTimeout(() => {
-                toast.removeClass('translate-x-full');
-            }, 100);
+        // Animate in
+        setTimeout(() => {
+            toast.removeClass('translate-x-full');
+        }, 100);
 
-            // Auto remove after 5 seconds
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            toast.addClass('translate-x-full');
             setTimeout(() => {
-                toast.addClass('translate-x-full');
-                setTimeout(() => {
-                    toast.remove();
-                }, 300);
-            }, 5000);
+                toast.remove();
+            }, 300);
+        }, 5000);
+    }
+
+    // Keyboard shortcuts
+    $(document).keydown(function(e) {
+        // Ctrl + F to focus search
+        if (e.ctrlKey && e.key === 'f') {
+            e.preventDefault();
+            $('#search-patient').focus();
         }
 
-        // Keyboard shortcuts
-        $(document).keydown(function(e) {
-            // Ctrl + F to focus search
-            if (e.ctrlKey && e.key === 'f') {
-                e.preventDefault();
-                $('#search-patient').focus();
-            }
+        // Enter to apply filters
+        if (e.key === 'Enter' && $(e.target).is('input, select')) {
+            loadReports();
+        }
 
-            // Enter to apply filters
-            if (e.key === 'Enter' && $(e.target).is('input, select')) {
-                loadReports();
-            }
-
-            // Escape to clear filters
-            if (e.key === 'Escape') {
-                $('#clear-filters').click();
-            }
-        });
-    });
-
-    // Enhanced file upload functionality
-    document.getElementById('file-input').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const fileInfo = document.getElementById('file-info');
-        const fileName = document.getElementById('file-name');
-
-        if (file) {
-            fileName.textContent = file.name;
-            fileInfo.classList.remove('hidden');
-        } else {
-            fileInfo.classList.add('hidden');
+        // Escape to clear filters
+        if (e.key === 'Escape') {
+            $('#clear-filters').click();
         }
     });
+});
 
-    // Drag and drop functionality
-    const fileDropArea = document.querySelector('.file-drop');
-    const fileInput = document.getElementById('file-input');
+// Enhanced file upload functionality
+document.getElementById('file-input').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const fileInfo = document.getElementById('file-info');
+    const fileName = document.getElementById('file-name');
 
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        fileDropArea.addEventListener(eventName, preventDefaults, false);
+    if (file) {
+        fileName.textContent = file.name;
+        fileInfo.classList.remove('hidden');
+    } else {
+        fileInfo.classList.add('hidden');
+    }
+});
+
+// Drag and drop functionality
+const fileDropArea = document.querySelector('.file-drop');
+const fileInput = document.getElementById('file-input');
+
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    fileDropArea.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+['dragenter', 'dragover'].forEach(eventName => {
+    fileDropArea.addEventListener(eventName, highlight, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    fileDropArea.addEventListener(eventName, unhighlight, false);
+});
+
+function highlight(e) {
+    fileDropArea.classList.add('border-blue-500', 'bg-blue-50');
+}
+
+function unhighlight(e) {
+    fileDropArea.classList.remove('border-blue-500', 'bg-blue-50');
+}
+
+fileDropArea.addEventListener('drop', handleDrop, false);
+
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+
+    fileInput.files = files;
+
+    // Trigger change event
+    const event = new Event('change', {
+        bubbles: true
     });
-
-    function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-
-    ['dragenter', 'dragover'].forEach(eventName => {
-        fileDropArea.addEventListener(eventName, highlight, false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-        fileDropArea.addEventListener(eventName, unhighlight, false);
-    });
-
-    function highlight(e) {
-        fileDropArea.classList.add('border-blue-500', 'bg-blue-50');
-    }
-
-    function unhighlight(e) {
-        fileDropArea.classList.remove('border-blue-500', 'bg-blue-50');
-    }
-
-    fileDropArea.addEventListener('drop', handleDrop, false);
-
-    function handleDrop(e) {
-        const dt = e.dataTransfer;
-        const files = dt.files;
-
-        fileInput.files = files;
-
-        // Trigger change event
-        const event = new Event('change', {
-            bubbles: true
-        });
-        fileInput.dispatchEvent(event);
-    }
+    fileInput.dispatchEvent(event);
+}
 </script>
 @endsection
