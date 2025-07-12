@@ -19,7 +19,9 @@ class Appointment extends Model
         'age',
         'address',
         'email',
-        'notes'
+        'notes',
+        'payment_reference',
+        'payment_submitted_at'
     ];
 
     public function doctor()

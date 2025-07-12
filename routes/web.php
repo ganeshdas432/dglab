@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Patient\PatientController;
 
 use App\Models\Appointment;
 use App\Models\Doctor;
@@ -43,6 +44,14 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Patient routes (mobile number based authentication)
+Route::prefix('patient')->name('patient.')->group(function () {
+    Route::get('login', [PatientController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [PatientController::class, 'login']);
+    Route::get('dashboard', [PatientController::class, 'dashboard'])->name('dashboard');
+    Route::get('logout', [PatientController::class, 'logout'])->name('logout');
+});
+
 
 Route::get('/dashboard', function () {
      $today = Carbon::today();
@@ -59,6 +68,7 @@ Route::get('/dashboard', function () {
 
 // Public appointment view & booking
 Route::post('appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+Route::post('appointments/{id}/submit-payment', [AppointmentController::class, 'submitPayment'])->name('appointments.submitPayment');
 
 // Appointment status check
 Route::get('appointments/status', [AppointmentController::class, 'statusForm'])->name('appointments.statusForm');
@@ -91,3 +101,11 @@ Route::delete('/doctors/{id}', [DoctorController::class, 'destroy'])->name('doct
 Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
 Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 Route::put('/doctors/{doctor}/update-available-date', [DoctorController::class, 'updateAvailableDate'])->name('doctors.update-date');
+
+// Patient routes (mobile number based authentication)
+Route::prefix('patient')->name('patient.')->group(function () {
+    Route::get('login', [PatientController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [PatientController::class, 'login']);
+    Route::get('dashboard', [PatientController::class, 'dashboard'])->name('dashboard');
+    Route::get('logout', [PatientController::class, 'logout'])->name('logout');
+});

@@ -309,6 +309,14 @@
                                     class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                     <i class="fas fa-calendar-check mr-1"></i>Date
                                 </th>
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                    <i class="fas fa-info-circle mr-1"></i>Status
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                    <i class="fas fa-cogs mr-1"></i>Actions
+                                </th>
                             </tr>
                         </thead>
                         <tbody id="appointments-tbody" class="bg-white divide-y divide-gray-200">
@@ -322,13 +330,15 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-2">
                             <span class="text-sm text-gray-700">
-                                Showing <span id="showing-from">1</span> to <span id="showing-to">10</span> of <span id="total-results">0</span> results
+                                Showing <span id="showing-from">1</span> to <span id="showing-to">10</span> of <span
+                                    id="total-results">0</span> results
                             </span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <div class="flex items-center space-x-1">
                                 <label for="per-page-select" class="text-sm text-gray-700">Show:</label>
-                                <select id="per-page-select" class="px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <select id="per-page-select"
+                                    class="px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
@@ -336,19 +346,23 @@
                                 </select>
                             </div>
                             <nav class="flex space-x-1">
-                                <button id="first-page" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button id="first-page"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <i class="fas fa-angle-double-left"></i>
                                 </button>
-                                <button id="prev-page" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button id="prev-page"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <i class="fas fa-angle-left"></i>
                                 </button>
                                 <div id="page-numbers" class="flex space-x-1">
                                     <!-- Page numbers will be dynamically generated -->
                                 </div>
-                                <button id="next-page" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button id="next-page"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <i class="fas fa-angle-right"></i>
                                 </button>
-                                <button id="last-page" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button id="last-page"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                                     <i class="fas fa-angle-double-right"></i>
                                 </button>
                             </nav>
@@ -358,6 +372,86 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div id="confirmationModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title"
+    role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Background overlay -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+        <!-- Modal panel -->
+        <div
+            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div
+                        class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <i class="fas fa-check-circle text-green-600"></i>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            Confirm Appointment
+                        </h3>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-500 mb-4">
+                                Please verify the payment reference number and confirm the appointment.
+                            </p>
+
+                            <!-- Patient Info -->
+                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <span class="font-medium text-gray-700">Patient:</span>
+                                        <span id="modal-patient-name" class="text-gray-900"></span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-700">Doctor:</span>
+                                        <span id="modal-doctor-name" class="text-gray-900"></span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-700">Mobile:</span>
+                                        <span id="modal-mobile" class="text-gray-900"></span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-700">Date:</span>
+                                        <span id="modal-date" class="text-gray-900"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Reference Input -->
+                            <div class="mb-4">
+                                <label for="payment-reference" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <i class="fas fa-receipt mr-1"></i>Payment Reference Number
+                                </label>
+                                <input type="text" id="payment-reference"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg form-input focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                    placeholder="Enter payment reference/transaction ID">
+                                <p class="mt-1 text-xs text-gray-500">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    This field will be pre-filled if payment reference is already available
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" id="confirm-appointment-btn"
+                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    <i class="fas fa-check mr-2"></i>
+                    Confirm Appointment
+                </button>
+                <button type="button" id="cancel-modal-btn"
+                    class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <i class="fas fa-times mr-2"></i>
+                    Cancel
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -563,6 +657,45 @@
             }
 
             appointments.forEach(function(appointment, index) {
+                // Status badge styling
+                let statusBadge = '';
+                let actionButton = '';
+
+                switch (appointment.status) {
+                    case 'Pending':
+                        statusBadge = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        <i class="fas fa-clock mr-1"></i>Pending
+                                      </span>`;
+                        actionButton = `<button onclick="openConfirmationModal(${appointment.id}, '${appointment.name}', '${appointment.doctor_name}', '${appointment.phone}', '${appointment.appointment_date}', '${appointment.payment_reference || ''}')" 
+                                               class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">
+                                                <i class="fas fa-check mr-1"></i>Confirm
+                                        </button>`;
+                        break;
+                    case 'Under Verification':
+                        statusBadge = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-hourglass-half mr-1"></i>Under Verification
+                                      </span>`;
+                        actionButton = `<button onclick="openConfirmationModal(${appointment.id}, '${appointment.name}', '${appointment.doctor_name}', '${appointment.phone}', '${appointment.appointment_date}', '${appointment.payment_reference || ''}')" 
+                                               class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">
+                                                <i class="fas fa-check mr-1"></i>Confirm
+                                        </button>`;
+                        break;
+                    case 'Confirmed':
+                        statusBadge = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        <i class="fas fa-check-circle mr-1"></i>Confirmed
+                                      </span>`;
+                        break;
+                    case 'Cancelled':
+                        statusBadge = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        <i class="fas fa-times-circle mr-1"></i>Cancelled
+                                      </span>`;
+                        break;
+                    default:
+                        statusBadge = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        ${appointment.status}
+                                      </span>`;
+                }
+
                 const row = `
                 <tr class="table-row transition-all duration-200 hover:bg-gray-50">
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -577,20 +710,20 @@
                             </div>
                             <div>
                                 <div class="text-sm font-medium text-gray-900">${appointment.name}</div>
-                                <div class="text-sm text-gray-500">${appointment.email}</div>
+                                <div class="text-sm text-gray-500">${appointment.email || 'No email'}</div>
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                             <i class="fas fa-birthday-cake mr-1"></i>
-                            ${appointment.age}
+                            ${appointment.age || 'N/A'}
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         <div class="flex items-center">
                             <i class="fas fa-map-marker-alt text-red-500 mr-2"></i>
-                            <span class="truncate max-w-xs" title="${appointment.address}">${appointment.address}</span>
+                            <span class="truncate max-w-xs" title="${appointment.address || 'No address'}">${appointment.address || 'No address'}</span>
                         </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -618,6 +751,12 @@
                             <span class="font-medium">${appointment.appointment_date}</span>
                         </div>
                     </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        ${statusBadge}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        ${actionButton || '<span class="text-gray-400 text-xs">No action</span>'}
+                    </td>
                 </tr>
             `;
                 tbody.append(row);
@@ -638,7 +777,7 @@
             const tbody = $('#appointments-tbody');
             tbody.html(`
             <tr>
-                <td colspan="7" class="px-6 py-12 text-center">
+                <td colspan="9" class="px-6 py-12 text-center">
                     <div class="flex flex-col items-center space-y-3">
                         <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
                             <i class="fas fa-calendar-times text-gray-400 text-2xl"></i>
@@ -809,6 +948,110 @@
             // Escape to clear filters
             if (e.key === 'Escape') {
                 $('#clear-filters').click();
+            }
+        });
+
+        // Global variable to store current appointment ID for confirmation
+        let currentAppointmentId = null;
+
+        // Modal functions
+        window.openConfirmationModal = function(appointmentId, patientName, doctorName, mobile, date,
+            paymentReference) {
+            currentAppointmentId = appointmentId;
+
+            // Populate modal with appointment details
+            $('#modal-patient-name').text(patientName);
+            $('#modal-doctor-name').text('Dr. ' + doctorName);
+            $('#modal-mobile').text(mobile);
+            $('#modal-date').text(date);
+            $('#payment-reference').val(paymentReference || '');
+
+            // Show modal
+            $('#confirmationModal').removeClass('hidden');
+            $('#payment-reference').focus();
+        };
+
+        // Close modal function
+        function closeConfirmationModal() {
+            $('#confirmationModal').addClass('hidden');
+            currentAppointmentId = null;
+            $('#payment-reference').val('');
+        }
+
+        // Modal event handlers
+        $('#cancel-modal-btn').on('click', closeConfirmationModal);
+
+        // Close modal when clicking outside
+        $('#confirmationModal').on('click', function(e) {
+            if (e.target === this) {
+                closeConfirmationModal();
+            }
+        });
+
+        // Confirm appointment
+        $('#confirm-appointment-btn').on('click', function() {
+            if (!currentAppointmentId) {
+                showToast('No appointment selected', 'error');
+                return;
+            }
+
+            const paymentReference = $('#payment-reference').val().trim();
+            if (!paymentReference) {
+                showToast('Please enter payment reference number', 'error');
+                $('#payment-reference').focus();
+                return;
+            }
+
+            // Show loading state
+            const btn = $(this);
+            const originalText = btn.html();
+            btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-2"></i>Confirming...');
+
+            // Make API call to confirm appointment
+            $.ajax({
+                url: `/appointments/${currentAppointmentId}/update-status`,
+                method: 'PATCH',
+                data: {
+                    status: 'Confirmed',
+                    payment_reference: paymentReference,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showToast('Appointment confirmed successfully!', 'success');
+                        closeConfirmationModal();
+                        loadAppointments(currentPage); // Reload current page
+                        loadStats(); // Refresh stats
+                    } else {
+                        showToast('Error: ' + (response.message ||
+                            'Failed to confirm appointment'), 'error');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error confirming appointment:', error);
+                    let errorMessage = 'Failed to confirm appointment';
+
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    } else if (xhr.status === 404) {
+                        errorMessage = 'Appointment not found';
+                    } else if (xhr.status === 422) {
+                        errorMessage = 'Invalid data provided';
+                    }
+
+                    showToast(errorMessage, 'error');
+                },
+                complete: function() {
+                    // Reset button state
+                    btn.prop('disabled', false).html(originalText);
+                }
+            });
+        });
+
+        // Close modal with Escape key
+        $(document).keydown(function(e) {
+            if (e.key === 'Escape' && !$('#confirmationModal').hasClass('hidden')) {
+                closeConfirmationModal();
             }
         });
     });

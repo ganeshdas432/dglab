@@ -68,6 +68,8 @@ class AppointmentController extends Controller
                         ? Carbon::parse($appointment->appointment_date)->format('M d, Y')
                         : 'Not scheduled',
                     'appointment_date_raw' => $appointment->appointment_date,
+                    'status' => $appointment->status ?? 'Pending',
+                    'payment_reference' => $appointment->payment_reference ?? '',
                     'created_at' => $appointment->created_at->format('M d, Y h:i A'),
                     'notes' => $appointment->notes ?? ''
                 ];
