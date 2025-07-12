@@ -8,7 +8,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <div class="flex items-center space-x-6">
                     <p class="text-gray-400 text-sm">
-                        © {{ date('Y') }} DG Lab. All rights reserved.
+                        © {{ date('Y') }} DG SKIN & HAIR CLINIC. All rights reserved.
                     </p>
                     <div class="flex items-center space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
@@ -36,26 +36,6 @@
     <i class="fas fa-arrow-up"></i>
 </button>
 
-<!-- Emergency Contact Banner -->
-<div id="emergencyBanner"
-    class="fixed bottom-20 left-6 bg-red-600 text-white p-4 rounded-lg shadow-lg max-w-sm opacity-0 transform translate-x-[-100%] transition-all duration-500 z-40">
-    <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-            <i class="fas fa-ambulance text-red-600"></i>
-        </div>
-        <div>
-            <p class="font-semibold text-sm">Emergency?</p>
-            <p class="text-xs">Call us immediately</p>
-        </div>
-        <a href="tel:+918100644924"
-            class="bg-white text-red-600 px-3 py-1 rounded-full text-xs font-semibold hover:bg-gray-100 transition-colors">
-            Call Now
-        </a>
-    </div>
-    <button onclick="hideEmergencyBanner()" class="absolute top-1 right-1 text-white hover:text-gray-200">
-        <i class="fas fa-times text-xs"></i>
-    </button>
-</div>
 
 <!-- Scripts -->
 @yield('scripts')
@@ -83,16 +63,7 @@
             });
         });
 
-        // Emergency banner functionality
-        const emergencyBanner = document.getElementById('emergencyBanner');
-
-        // Show emergency banner after 5 seconds
-        setTimeout(function() {
-            if (!localStorage.getItem('emergencyBannerHidden')) {
-                emergencyBanner.classList.remove('opacity-0', 'translate-x-[-100%]');
-                emergencyBanner.classList.add('opacity-100', 'translate-x-0');
-            }
-        }, 5000);
+      
 
         // Enhanced file upload functionality (if needed)
         const fileInput = document.getElementById('file-input');

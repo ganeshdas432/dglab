@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title', 'Dashboard')
-@section('page-title', 'DG Lab Dashboard')
+@section('page-title', 'DG SKIN & HAIR CLINIC')
 
 @section('additional-styles')
 .stat-card {
@@ -25,7 +25,7 @@ box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.
 <!-- Welcome Section -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800 mb-2">Welcome to DG Lab</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">Welcome to DG SKIN & HAIR CLINIC</h2>
         <p class="text-gray-600">Here's what's happening in your medical practice today</p>
     </div>
 

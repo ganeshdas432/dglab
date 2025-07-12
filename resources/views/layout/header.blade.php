@@ -6,7 +6,7 @@
                 <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
                     <i class="fas fa-hospital text-blue-600"></i>
                 </div>
-                <h1 class="text-2xl font-bold text-white">@yield('page-title', 'DG Lab Management')</h1>
+                <h1 class="text-2xl font-bold text-white">@yield('page-title', 'DG SKIN & HAIR CLINIC')</h1>
             </div>
             <div class="flex items-center space-x-6">
                 <a href="{{ route('dashboard') }}"
