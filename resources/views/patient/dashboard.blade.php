@@ -27,12 +27,13 @@
             color: white;
             box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3);
             transform: translateY(-2px);
+            border: 2px solid transparent;
         }
 
         .tab-inactive {
             background-color: #f8fafc;
             color: #64748b;
-            border: 1px solid #e2e8f0;
+            border: 2px solid #e2e8f0;
         }
 
         .tab-inactive:hover {
@@ -40,19 +41,37 @@
             color: #475569;
             transform: translateY(-1px);
             box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
         }
 
         .tab-button {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 12px;
-            margin: 8px 4px;
-            padding: 12px 24px;
+            padding: 12px 20px;
+            margin: 4px 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            min-height: 48px;
+        }
+
+        @media (max-width: 640px) {
+            .tab-button {
+                padding: 10px 16px;
+                margin: 2px 0;
+                min-height: 44px;
+                font-size: 14px;
+            }
         }
 
         .custom-table {
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background: white;
         }
 
         .table-header {
@@ -61,12 +80,49 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             font-size: 0.75rem;
+            color: #374151;
+        }
+
+        .table-header th {
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .table-row {
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f1f5f9;
         }
 
         .table-row:hover {
             background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            transform: scale(1.002);
-            transition: all 0.2s ease;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-row td {
+            padding: 16px 12px;
+            vertical-align: middle;
+        }
+
+        /* Mobile table improvements */
+        @media (max-width: 768px) {
+            .custom-table {
+                font-size: 12px;
+            }
+
+            .table-header th {
+                padding: 12px 8px;
+            }
+
+            .table-row td {
+                padding: 12px 8px;
+            }
         }
 
         .status-badge {
@@ -169,9 +225,22 @@
             transform: translateY(-1px);
         }
 
+        .dataTables_wrapper {
+            padding: 0;
+            margin: 0;
+        }
+
         .dataTables_wrapper .dataTables_length,
         .dataTables_wrapper .dataTables_filter {
             margin-bottom: 1rem;
+        }
+
+        .dataTables_wrapper .dataTables_length {
+            float: left;
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
         }
 
         .dataTables_wrapper .dataTables_filter input {
@@ -181,12 +250,14 @@
             padding: 8px 12px;
             transition: all 0.3s ease;
             color: #374151;
+            margin-left: 8px;
         }
 
         .dataTables_wrapper .dataTables_filter input:focus {
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
             background-color: #ffffff;
+            outline: none;
         }
 
         .dataTables_wrapper .dataTables_length select {
@@ -195,15 +266,19 @@
             border-radius: 8px;
             padding: 6px 12px;
             color: #374151;
+            margin-left: 8px;
         }
 
         .dataTables_wrapper .dataTables_info {
             color: #6b7280;
             font-size: 0.875rem;
+            margin-top: 1rem;
+            clear: both;
         }
 
         .dataTables_wrapper .dataTables_paginate {
             margin-top: 1rem;
+            text-align: center;
         }
 
         .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -214,6 +289,7 @@
             margin: 0 2px !important;
             border-radius: 6px !important;
             transition: all 0.2s ease !important;
+            text-decoration: none !important;
         }
 
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
@@ -242,9 +318,109 @@
             font-size: 0.875rem;
         }
 
+        /* Mobile responsiveness for DataTables */
+        @media (max-width: 768px) {
+
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter {
+                float: none;
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+
+            .dataTables_wrapper .dataTables_paginate {
+                font-size: 0.75rem;
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                padding: 6px 8px !important;
+                font-size: 0.75rem !important;
+            }
+        }
+
         .welcome-gradient {
             background: linear-gradient(135deg, #1e3a8a, #3730a3, #581c87);
             color: white;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            .tab-button {
+                margin: 4px 0;
+                padding: 8px 16px;
+                border-radius: 8px;
+            }
+
+            .custom-table {
+                font-size: 0.75rem;
+            }
+
+            .table-header th {
+                font-size: 10px;
+                padding: 8px 4px;
+            }
+
+            .table-row td {
+                padding: 8px 4px;
+                font-size: 11px;
+            }
+
+            .status-badge {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.65rem;
+            }
+
+            .download-btn {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+
+            .modal-dialog {
+                margin: 1rem;
+            }
+
+            .modal-content {
+                border-radius: 12px;
+            }
+
+            /* Hide table borders on mobile for cleaner look */
+            .table-row {
+                border-bottom: 1px solid #f8fafc;
+            }
+
+            /* Better mobile table scrolling */
+            .custom-table {
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                scrollbar-color: #cbd5e1 #f8fafc;
+            }
+
+            .custom-table::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .custom-table::-webkit-scrollbar-track {
+                background: #f8fafc;
+            }
+
+            .custom-table::-webkit-scrollbar-thumb {
+                background: #cbd5e1;
+                border-radius: 2px;
+            }
+        }
+
+        /* Improved tab container */
+        .tab-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        /* Better table appearance */
+        .table-row:nth-child(even) {
+            background: #fafbfc;
         }
     </style>
 </head>
@@ -257,108 +433,126 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <h1 class="text-xl font-bold text-gray-900">DG SKIN & HAIR CLINIC - Patient Portal</h1>
+                        <h1 class="text-sm sm:text-lg lg:text-xl font-bold text-gray-900">DG SKIN & HAIR CLINIC</h1>
+                        <p class="text-xs text-gray-600 hidden sm:block">Patient Portal</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="flex items-center text-sm text-gray-700">
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <div class="hidden sm:flex items-center text-sm text-gray-700">
                         <i class="fas fa-mobile-alt mr-2 text-blue-600"></i>
                         <span class="font-medium">{{ $mobileNo }}</span>
                     </div>
-                    <button onclick="openAppointmentModal()"
-                        class="bg-green-100 hover:bg-green-200 text-green-700 px-3 py-2 rounded-lg text-sm transition-colors duration-200 flex items-center">
-                        <i class="fas fa-calendar-plus mr-1"></i>
-                        Book Appointment
-                    </button>
-                    <a href="{{ route('patient.logout') }}"
-                        class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-2 rounded-lg text-sm transition-colors duration-200 flex items-center">
-                        <i class="fas fa-sign-out-alt mr-1"></i>
-                        Logout
-                    </a>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="openAppointmentModal()"
+                            class="bg-green-100 hover:bg-green-200 text-green-700 px-2 py-1 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm transition-colors duration-200 flex items-center">
+                            <i class="fas fa-calendar-plus sm:mr-1"></i>
+                            <span class="hidden sm:inline">Book Appointment</span>
+                        </button>
+                        <a href="{{ route('patient.logout') }}"
+                            class="bg-red-100 hover:bg-red-200 text-red-700 px-2 py-1 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm transition-colors duration-200 flex items-center">
+                            <i class="fas fa-sign-out-alt sm:mr-1"></i>
+                            <span class="hidden sm:inline">Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Info Bar -->
+            <div class="sm:hidden pb-2">
+                <div class="flex items-center justify-center text-xs text-gray-600">
+                    <i class="fas fa-mobile-alt mr-1 text-blue-600"></i>
+                    <span>{{ $mobileNo }}</span>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="w-full py-6 px-4 sm:px-6 lg:px-8">
+    <main class="w-full py-4 sm:py-6 px-2 sm:px-4 lg:px-8">
 
         <!-- Welcome Section -->
-        <div class="welcome-gradient rounded-2xl shadow-xl p-8 mb-8 text-white relative overflow-hidden">
+        <div
+            class="welcome-gradient rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 text-white relative overflow-hidden">
             <div class="absolute inset-0 bg-black bg-opacity-10"></div>
-            <div class="relative flex items-center justify-between">
-                <div>
-                    <h2 class="text-3xl font-bold mb-3">Welcome to Your Health Portal</h2>
-                    <p class="text-lg opacity-90">Manage your medical reports and health information seamlessly</p>
+            <div class="relative flex flex-col sm:flex-row items-center justify-between">
+                <div class="text-center sm:text-left">
+                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3">Welcome to Your Health Portal
+                    </h2>
+                    <p class="text-sm sm:text-base lg:text-lg opacity-90">Manage your medical reports and health
+                        information seamlessly</p>
                 </div>
-                <div class="hidden md:block">
-                    <i class="fas fa-user-md text-7xl opacity-30"></i>
+                <div class="hidden sm:block mt-4 sm:mt-0">
+                    <i class="fas fa-user-md text-4xl sm:text-5xl lg:text-7xl opacity-30"></i>
                 </div>
             </div>
         </div>
 
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="stats-card rounded-2xl shadow-sm p-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
+            <div class="stats-card rounded-xl sm:rounded-2xl shadow-sm p-3 sm:p-4 lg:p-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <div
-                            class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-file-medical text-white text-xl"></i>
+                            class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-file-medical text-white text-sm sm:text-base lg:text-xl"></i>
                         </div>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Reports</h3>
-                        <p class="text-3xl font-bold text-gray-900 mt-1">{{ $reports->count() }}</p>
+                    <div class="ml-2 sm:ml-3 lg:ml-4">
+                        <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Reports
+                        </h3>
+                        <p class="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 mt-1">{{ $reports->count() }}
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div class="stats-card rounded-2xl shadow-sm p-6">
+            <div class="stats-card rounded-xl sm:rounded-2xl shadow-sm p-3 sm:p-4 lg:p-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <div
-                            class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-download text-white text-xl"></i>
+                            class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-download text-white text-sm sm:text-base lg:text-xl"></i>
                         </div>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Downloaded</h3>
-                        <p class="text-3xl font-bold text-gray-900 mt-1">
+                    <div class="ml-2 sm:ml-3 lg:ml-4">
+                        <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Downloaded
+                        </h3>
+                        <p class="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 mt-1">
                             {{ $reports->whereNotNull('downloaded_at')->count() }}
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="stats-card rounded-2xl shadow-sm p-6">
+            <div class="stats-card rounded-xl sm:rounded-2xl shadow-sm p-3 sm:p-4 lg:p-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <div
-                            class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-clock text-white text-xl"></i>
+                            class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-clock text-white text-sm sm:text-base lg:text-xl"></i>
                         </div>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">New Reports</h3>
-                        <p class="text-3xl font-bold text-gray-900 mt-1">
+                    <div class="ml-2 sm:ml-3 lg:ml-4">
+                        <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">New Reports
+                        </h3>
+                        <p class="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 mt-1">
                             {{ $reports->whereNull('downloaded_at')->count() }}
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="stats-card rounded-2xl shadow-sm p-6">
+            <div class="stats-card rounded-xl sm:rounded-2xl shadow-sm p-3 sm:p-4 lg:p-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <div
-                            class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-calendar-check text-white text-xl"></i>
+                            class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-calendar-check text-white text-sm sm:text-base lg:text-xl"></i>
                         </div>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Appointments</h3>
-                        <p class="text-3xl font-bold text-gray-900 mt-1">
+                    <div class="ml-2 sm:ml-3 lg:ml-4">
+                        <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Appointments
+                        </h3>
+                        <p class="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 mt-1">
                             {{ isset($appointments) ? $appointments->count() : 0 }}
                         </p>
                     </div>
@@ -367,133 +561,149 @@
         </div>
 
         <!-- Tabs Navigation -->
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 mb-8 overflow-hidden">
-            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4">
-                <nav class="flex space-x-2">
-                    <button onclick="switchTab('appointments')" id="appointments-tab"
-                        class="tab-button tab-active font-semibold text-sm flex items-center">
+        <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 mb-6 sm:mb-8 overflow-hidden">
+            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
+                <nav class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                    <button onclick="switchTab('appointments')" id="appointments-tab" class="tab-button tab-active">
                         <i class="fas fa-calendar mr-2"></i>
-                        Appointments
-                        <span
-                            class="ml-2 bg-white bg-opacity-20 text-xs px-2 py-1 rounded-full">{{ isset($appointments) ? $appointments->count() : 0 }}</span>
+                        <span>Appointments</span>
+                        <span class="ml-2 bg-white bg-opacity-20 text-xs px-2 py-1 rounded-full">
+                            {{ isset($appointments) ? $appointments->count() : 0 }}
+                        </span>
                     </button>
-                    <button onclick="switchTab('reports')" id="reports-tab"
-                        class="tab-button tab-inactive font-semibold text-sm flex items-center">
+                    <button onclick="switchTab('reports')" id="reports-tab" class="tab-button tab-inactive">
                         <i class="fas fa-file-medical mr-2"></i>
-                        Medical Reports
-                        <span
-                            class="ml-2 bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full">{{ $reports->count() }}</span>
+                        <span>Medical Reports</span>
+                        <span class="ml-2 bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full">
+                            {{ $reports->count() }}
+                        </span>
                     </button>
                 </nav>
             </div>
 
             <!-- Appointments Tab Content -->
             <div id="appointments-content" class="tab-content">
-                <div class="p-8">
-                    <div class="flex items-center justify-between mb-6">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900">Your Appointments</h3>
-                            <p class="text-gray-600 mt-1">View and manage your appointment history</p>
+                <div class="p-4 sm:p-6 lg:p-8">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6">
+                        <div class="mb-4 sm:mb-0">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Your Appointments</h3>
+                            <p class="text-gray-600 mt-1 text-sm sm:text-base">View and manage your appointment history
+                            </p>
                         </div>
                         <button onclick="openAppointmentModal()"
-                            class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                             <i class="fas fa-plus mr-2"></i>
-                            Book New Appointment
+                            <span class="text-sm sm:text-base">Book New Appointment</span>
                         </button>
                     </div>
 
                     @if(isset($appointments) && $appointments->count() > 0)
-                    <div class="custom-table">
-                        <table id="appointmentsTable" class="w-full text-sm">
+                    <div class="custom-table overflow-x-auto">
+                        <table id="appointmentsTable" class="w-full">
                             <thead class="table-header">
                                 <tr>
-                                    <th class="px-6 py-4 text-left">Appointment ID</th>
-                                    <th class="px-6 py-4 text-left">Patient Name</th>
-                                    <th class="px-6 py-4 text-left">Doctor</th>
-                                    <th class="px-6 py-4 text-left">Appointment Date</th>
-                                    <th class="px-6 py-4 text-left">Age</th>
-                                    <th class="px-6 py-4 text-left">Address</th>
-                                    <th class="px-6 py-4 text-left">Status</th>
-                                    <th class="px-6 py-4 text-left">Created</th>
-                                    <th class="px-6 py-4 text-center">Action</th>
+                                    <th class="text-left">ID</th>
+                                    <th class="text-left">Patient</th>
+                                    <th class="text-left hidden sm:table-cell">Doctor</th>
+                                    <th class="text-left">Date</th>
+                                    <th class="text-left hidden md:table-cell">Age</th>
+                                    <th class="text-left hidden lg:table-cell">Address</th>
+                                    <th class="text-left">Status</th>
+                                    <th class="text-left hidden md:table-cell">Created</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($appointments as $appointment)
-                                <tr class="table-row bg-white border-b border-gray-100">
-                                    <td class="px-6 py-4">
+                                <tr class="table-row">
+                                    <td class="whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div
-                                                class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-calendar text-purple-600 text-sm"></i>
+                                                class="w-6 h-6 sm:w-8 sm:h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
+                                                <i class="fas fa-calendar text-purple-600 text-xs sm:text-sm"></i>
                                             </div>
-                                            <span class="font-semibold text-gray-900">#{{ $appointment->id }}</span>
+                                            <span
+                                                class="font-semibold text-gray-900 text-xs sm:text-sm">#{{ $appointment->id }}</span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span class="font-medium text-gray-900">{{ $appointment->name }}</span>
+                                    <td>
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="font-medium text-gray-900 text-xs sm:text-sm">{{ $appointment->name }}</span>
+                                            <span class="text-xs text-gray-500 sm:hidden">Dr.
+                                                {{ $appointment->doctor_name }}</span>
+                                        </div>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="hidden sm:table-cell">
                                         <div class="flex items-center">
                                             <div
-                                                class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                                class="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-full flex items-center justify-center mr-2 sm:mr-3">
                                                 <i class="fas fa-user-md text-blue-600 text-xs"></i>
                                             </div>
-                                            <span class="text-gray-700">{{ $appointment->doctor_name }}</span>
+                                            <span
+                                                class="text-gray-700 text-xs sm:text-sm">{{ $appointment->doctor_name }}</span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="text-gray-700">{{ $appointment->appointment_date ? \Carbon\Carbon::parse($appointment->appointment_date)->format('M d, Y') : 'N/A' }}</span>
+                                    <td class="whitespace-nowrap">
+                                        <span class="text-gray-700 text-xs sm:text-sm">
+                                            {{ $appointment->appointment_date ? \Carbon\Carbon::parse($appointment->appointment_date)->format('M d, Y') : 'N/A' }}
+                                        </span>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-gray-700">{{ $appointment->age }}</span>
+                                    <td class="hidden md:table-cell">
+                                        <span class="text-gray-700 text-xs sm:text-sm">{{ $appointment->age }}</span>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="hidden lg:table-cell">
                                         <span
                                             class="text-gray-700 text-xs">{{ Str::limit($appointment->address, 30) }}</span>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="whitespace-nowrap">
                                         @if($appointment->status == 'Confirmed')
-                                        <span class="status-badge bg-green-100 text-green-800">
-                                            <i class="fas fa-check mr-1"></i>Confirmed
+                                        <span class="status-badge bg-green-100 text-green-800 text-xs">
+                                            <i class="fas fa-check mr-1"></i>
+                                            <span class="hidden sm:inline">Confirmed</span>
                                         </span>
                                         @elseif($appointment->status == 'Pending')
-                                        <span class="status-badge bg-yellow-100 text-yellow-800">
-                                            <i class="fas fa-clock mr-1"></i>Pending
+                                        <span class="status-badge bg-yellow-100 text-yellow-800 text-xs">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span class="hidden sm:inline">Pending</span>
                                         </span>
                                         @elseif($appointment->status == 'Under Verification')
-                                        <span class="status-badge bg-blue-100 text-blue-800">
-                                            <i class="fas fa-hourglass-half mr-1"></i>Under Verification
+                                        <span class="status-badge bg-blue-100 text-blue-800 text-xs">
+                                            <i class="fas fa-hourglass-half mr-1"></i>
+                                            <span class="hidden sm:inline">Under Verification</span>
                                         </span>
                                         @elseif($appointment->status == 'Cancelled')
-                                        <span class="status-badge bg-red-100 text-red-800">
-                                            <i class="fas fa-times mr-1"></i>Cancelled
+                                        <span class="status-badge bg-red-100 text-red-800 text-xs">
+                                            <i class="fas fa-times mr-1"></i>
+                                            <span class="hidden sm:inline">Cancelled</span>
                                         </span>
                                         @else
-                                        <span class="status-badge bg-gray-100 text-gray-800">
+                                        <span class="status-badge bg-gray-100 text-gray-800 text-xs">
                                             {{ ucfirst($appointment->status) }}
                                         </span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="text-gray-700">{{ $appointment->created_at ? $appointment->created_at->format('M d, Y') : 'N/A' }}</span>
+                                    <td class="hidden md:table-cell">
+                                        <span class="text-gray-700 text-xs sm:text-sm">
+                                            {{ $appointment->created_at ? $appointment->created_at->format('M d, Y') : 'N/A' }}
+                                        </span>
                                     </td>
-                                    <td class="px-6 py-4 text-center">
+                                    <td class="text-center">
                                         @if($appointment->status == 'Pending')
                                         <button onclick="openPaymentModal({{ $appointment->id }})"
-                                            class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-xs font-semibold py-2 px-4 rounded-lg inline-flex items-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                                            <i class="fas fa-credit-card mr-2"></i>
-                                            Pay Now
+                                            class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-xs font-semibold py-1 sm:py-2 px-2 sm:px-4 rounded-lg inline-flex items-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                            <i class="fas fa-credit-card sm:mr-2"></i>
+                                            <span class="hidden sm:inline">Pay Now</span>
                                         </button>
                                         @elseif($appointment->status == 'Under Verification')
                                         <span class="text-xs text-blue-600 font-medium">
-                                            <i class="fas fa-info-circle mr-1"></i>Payment Submitted
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            <span class="hidden sm:inline">Payment Submitted</span>
                                         </span>
                                         @else
                                         <span class="text-xs text-gray-500">
-                                            <i class="fas fa-check-circle mr-1"></i>{{ $appointment->status }}
+                                            <i class="fas fa-check-circle mr-1"></i>
+                                            <span class="hidden sm:inline">{{ $appointment->status }}</span>
                                         </span>
                                         @endif
                                     </td>
@@ -503,17 +713,19 @@
                         </table>
                     </div>
                     @else
-                    <div class="text-center py-16 bg-gray-50 rounded-2xl">
+                    <div class="text-center py-12 sm:py-16 bg-gray-50 rounded-xl sm:rounded-2xl">
                         <div
-                            class="w-32 h-32 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-calendar text-purple-400 text-4xl"></i>
+                            class="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                            <i class="fas fa-calendar text-purple-400 text-2xl sm:text-3xl lg:text-4xl"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-700 mb-3">No Appointments Found</h3>
-                        <p class="text-gray-500 text-lg mb-8">You haven't booked any appointments yet.</p>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-700 mb-2 sm:mb-3">No Appointments
+                            Found</h3>
+                        <p class="text-gray-500 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8">You haven't booked any
+                            appointments yet.</p>
                         <button onclick="openAppointmentModal()"
-                            class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 lg:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                             <i class="fas fa-calendar-plus mr-2"></i>
-                            Book Your First Appointment
+                            <span class="text-sm sm:text-base">Book Your First Appointment</span>
                         </button>
                     </div>
                     @endif
@@ -522,79 +734,92 @@
 
             <!-- Reports Tab Content -->
             <div id="reports-content" class="tab-content hidden">
-                <div class="p-8">
-                    <div class="flex items-center justify-between mb-6">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900">Your Medical Reports</h3>
-                            <p class="text-gray-600 mt-1">Manage and download your medical reports</p>
+                <div class="p-4 sm:p-6 lg:p-8">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6">
+                        <div class="mb-4 sm:mb-0">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Your Medical Reports</h3>
+                            <p class="text-gray-600 mt-1 text-sm sm:text-base">Manage and download your medical reports
+                            </p>
                         </div>
-                        <div class="flex items-center bg-gray-100 rounded-lg px-4 py-2">
+                        <div class="flex items-center bg-gray-100 rounded-lg px-3 sm:px-4 py-2">
                             <i class="fas fa-chart-bar text-gray-500 mr-2"></i>
-                            <span class="text-sm font-medium text-gray-700">{{ $reports->count() }} reports found</span>
+                            <span class="text-xs sm:text-sm font-medium text-gray-700">{{ $reports->count() }} reports
+                                found</span>
                         </div>
                     </div>
 
                     @if($reports->count() > 0)
-                    <div class="custom-table">
-                        <table id="reportsTable" class="w-full text-sm">
+                    <div class="custom-table overflow-x-auto">
+                        <table id="reportsTable" class="w-full">
                             <thead class="table-header">
                                 <tr>
-                                    <th class="px-6 py-4 text-left">Report ID</th>
-                                    <th class="px-6 py-4 text-left">Patient Name</th>
-                                    <th class="px-6 py-4 text-left">Bill Date</th>
-                                    <th class="px-6 py-4 text-left">Uploaded</th>
-                                    <th class="px-6 py-4 text-left">Status</th>
-                                    <th class="px-6 py-4 text-left">Downloaded</th>
-                                    <th class="px-6 py-4 text-center">Action</th>
+                                    <th class="text-left">Report ID</th>
+                                    <th class="text-left">Patient Name</th>
+                                    <th class="text-left hidden sm:table-cell">Bill Date</th>
+                                    <th class="text-left hidden md:table-cell">Uploaded</th>
+                                    <th class="text-left">Status</th>
+                                    <th class="text-left hidden lg:table-cell">Downloaded</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($reports as $report)
-                                <tr class="table-row bg-white border-b border-gray-100">
-                                    <td class="px-6 py-4">
+                                <tr class="table-row">
+                                    <td>
                                         <div class="flex items-center">
                                             <div
-                                                class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-file-pdf text-blue-600 text-sm"></i>
+                                                class="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
+                                                <i class="fas fa-file-pdf text-blue-600 text-xs sm:text-sm"></i>
                                             </div>
-                                            <span class="font-semibold text-gray-900">#{{ $report->id }}</span>
+                                            <span
+                                                class="font-semibold text-gray-900 text-xs sm:text-sm">#{{ $report->id }}</span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span class="font-medium text-gray-900">{{ $report->patient_name }}</span>
+                                    <td>
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="font-medium text-gray-900 text-xs sm:text-sm">{{ $report->patient_name }}</span>
+                                            <span class="text-xs text-gray-500 sm:hidden">
+                                                {{ $report->bill_date ? $report->bill_date->format('M d, Y') : 'N/A' }}
+                                            </span>
+                                        </div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="text-gray-700">{{ $report->bill_date ? $report->bill_date->format('M d, Y') : 'N/A' }}</span>
+                                    <td class="hidden sm:table-cell">
+                                        <span class="text-gray-700 text-xs sm:text-sm">
+                                            {{ $report->bill_date ? $report->bill_date->format('M d, Y') : 'N/A' }}
+                                        </span>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="text-gray-700">{{ $report->created_at ? $report->created_at->format('M d, Y') : 'N/A' }}</span>
+                                    <td class="hidden md:table-cell">
+                                        <span class="text-gray-700 text-xs sm:text-sm">
+                                            {{ $report->created_at ? $report->created_at->format('M d, Y') : 'N/A' }}
+                                        </span>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td>
                                         @if($report->downloaded_at)
-                                        <span class="status-badge bg-green-100 text-green-800">
-                                            <i class="fas fa-check mr-1"></i>Downloaded
+                                        <span class="status-badge bg-green-100 text-green-800 text-xs">
+                                            <i class="fas fa-check mr-1"></i>
+                                            <span class="hidden sm:inline">Downloaded</span>
                                         </span>
                                         @else
-                                        <span class="status-badge bg-yellow-100 text-yellow-800">
-                                            <i class="fas fa-clock mr-1"></i>New
+                                        <span class="status-badge bg-yellow-100 text-yellow-800 text-xs">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span class="hidden sm:inline">New</span>
                                         </span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="hidden lg:table-cell">
                                         @if($report->downloaded_at)
                                         <span
-                                            class="text-sm text-gray-600">{{ $report->downloaded_at->format('M d, Y h:i A') }}</span>
+                                            class="text-xs text-gray-600">{{ $report->downloaded_at->format('M d, Y h:i A') }}</span>
                                         @else
-                                        <span class="text-sm text-gray-400">Not downloaded</span>
+                                        <span class="text-xs text-gray-400">Not downloaded</span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 text-center">
+                                    <td class="text-center">
                                         <a href="{{ route('reports.download-public', $report->id) }}"
-                                            class="download-btn text-white text-xs font-semibold py-2 px-4 rounded-lg inline-flex items-center">
-                                            <i class="fas fa-download mr-2"></i>
-                                            Download
+                                            class="download-btn text-white text-xs font-semibold py-1 sm:py-2 px-2 sm:px-4 rounded-lg inline-flex items-center">
+                                            <i class="fas fa-download sm:mr-2"></i>
+                                            <span class="hidden sm:inline">Download</span>
                                         </a>
                                     </td>
                                 </tr>
@@ -853,12 +1078,14 @@
 
             // Remove active class from all tabs
             document.querySelectorAll('[id$="-tab"]').forEach(tab => {
-                tab.className = 'tab-button tab-inactive font-semibold text-sm flex items-center';
+                tab.className = 'tab-button tab-inactive';
                 // Update badge styling for inactive tabs
-                const badge = tab.querySelector('span');
-                if (badge) {
-                    badge.className = 'ml-2 bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full';
-                }
+                const badges = tab.querySelectorAll('span');
+                badges.forEach((badge, index) => {
+                    if (index > 0) { // Skip the first span (text), target the badge
+                        badge.className = 'ml-2 bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full';
+                    }
+                });
             });
 
             // Show selected tab content
@@ -866,13 +1093,15 @@
 
             // Add active class to selected tab
             const activeTab = document.getElementById(tabName + '-tab');
-            activeTab.className = 'tab-button tab-active font-semibold text-sm flex items-center';
+            activeTab.className = 'tab-button tab-active';
 
             // Update badge styling for active tab
-            const activeBadge = activeTab.querySelector('span');
-            if (activeBadge) {
-                activeBadge.className = 'ml-2 bg-white bg-opacity-20 text-xs px-2 py-1 rounded-full';
-            }
+            const activeBadges = activeTab.querySelectorAll('span');
+            activeBadges.forEach((badge, index) => {
+                if (index > 0) { // Skip the first span (text), target the badge
+                    badge.className = 'ml-2 bg-white bg-opacity-20 text-xs px-2 py-1 rounded-full';
+                }
+            });
         }
 
         // Modal functionality
@@ -993,17 +1222,21 @@
                         [0, 'desc']
                     ], // Sort by Report ID descending
                     columnDefs: [{
-                            orderable: false,
-                            targets: [6]
-                        } // Disable sorting on Action column
-                    ],
+                        orderable: false,
+                        targets: [-1] // Disable sorting on Action column (last column)
+                    }],
                     language: {
                         search: "Search reports:",
                         lengthMenu: "Show _MENU_ reports per page",
                         info: "Showing _START_ to _END_ of _TOTAL_ reports",
                         infoEmpty: "No reports available",
                         emptyTable: "No reports found"
-                    }
+                    },
+                    dom: '<"flex flex-col sm:flex-row justify-between items-center mb-4"lf>rt<"flex flex-col sm:flex-row justify-between items-center mt-4"ip>',
+                    lengthMenu: [
+                        [5, 10, 25, 50, -1],
+                        [5, 10, 25, 50, "All"]
+                    ]
                 });
             }
 
@@ -1015,13 +1248,22 @@
                     order: [
                         [0, 'desc']
                     ], // Sort by Appointment ID descending
+                    columnDefs: [{
+                        orderable: false,
+                        targets: [-1] // Disable sorting on Action column (last column)
+                    }],
                     language: {
                         search: "Search appointments:",
                         lengthMenu: "Show _MENU_ appointments per page",
                         info: "Showing _START_ to _END_ of _TOTAL_ appointments",
                         infoEmpty: "No appointments available",
                         emptyTable: "No appointments found"
-                    }
+                    },
+                    dom: '<"flex flex-col sm:flex-row justify-between items-center mb-4"lf>rt<"flex flex-col sm:flex-row justify-between items-center mt-4"ip>',
+                    lengthMenu: [
+                        [5, 10, 25, 50, -1],
+                        [5, 10, 25, 50, "All"]
+                    ]
                 });
             }
         });
